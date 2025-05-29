@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scavenger Hunt Challenge</title>
+    <style>
+        body { font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background-color: #f4f4f9; }
+        .container { max-width: 400px; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 0 20px rgba(0,0,0,0.1); }
+        input { width: 100%; padding: 10px; margin: 10px 0; }
+        button { padding: 10px 15px; background-color: #4CAF50; color: #fff; border: none; cursor: pointer; width: 100%; }
+        button:hover { background-color: #45a049; }
+        p { font-size: 18px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <p id="clue">Insert the password please:</p>
+        <input type="text" id="answer" placeholder="Type your answer here...">
+        <button onclick="checkAnswer()">Check Answer</button>
+        <p id="feedback" style="color:red;"></p>
+    </div>
+
+    <script>
+        const clues = [
+            "Seven!"
+        ];
+        let currentClue = 0;
+
+        function checkAnswer() {
+            const answer = document.getElementById('answer').value.trim().toLowerCase();
+            if (answer === clues[currentClue].toLowerCase()) {
+                currentClue++;
+                if (currentClue < clues.length) {
+                    document.getElementById('clue').textContent = "Correct! Next: " + clues[currentClue];
+                    document.getElementById('feedback').textContent = "";
+                    document.getElementById('answer').value = "";
+                } else {
+                    document.getElementById('clue').textContent = "Congratulations! You've completed the challenge. \n \nDraw a dinosaur, give it a name and write 3 sentences to introduce it. Then give your drawing to Ms. Shinohara to show you finished!";
+                    document.getElementById('feedback').textContent = "";
+                    document.getElementById('answer').style.display = "none";
+                    document.querySelector('button').style.display = "none";
+                }
+            } else {
+                document.getElementById('feedback').textContent = "Incorrect. Try again.";
+            }
+        }
+    </script>
+</body>
+</html>
